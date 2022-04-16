@@ -1,12 +1,14 @@
-version: '3.7'
-
+version: '3.9'
 services:
-
   web:
     build: ./
-    command : python manage.py runserver 0.0.0.0:8000
     ports:
       - target: 8000
         published: 80
         protocol: tcp
         mode: host
+    volumes:
+      - type: bind
+        source: /root/clappy
+        target: /code
+    command: python manage.py runserver 0.0.0.0:8000
