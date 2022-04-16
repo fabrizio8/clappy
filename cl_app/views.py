@@ -9,7 +9,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 from django.core.exceptions import PermissionDenied
 
 class OwnershipRequired():
@@ -32,7 +32,7 @@ class IndexView(ListView):
         context = super().get_context_data(**kwargs)
         context['cities'] = City.objects.all()
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context["profile"] = Profile.objects.get(user=self.request.user)
         else:
             context["login_form"] = AuthenticationForm()

@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.urls import include
+from django.urls import re_path as url
 from django.contrib import admin
 from cl_app.views import IndexView, RegisterView, SearchListView, ListingUpdateView, ListingDeleteView, ListingTypeCreateView, ListingCreateView, ListingDetailView, ProfileView, CityListView, CategoryListView, CityCategoryListView
 from cl_api.views import ListingListCreateAPIView, ListingRetrieveUpdateAPIView, CategoryListCreateAPIView, CategoryRetriveUpdateAPIView, SubCategoryListCreateAPIView, SubCategoryRetriveUpdateAPIView, CategoryListingListAPIView, SubCategoryListingListAPIView, UserCreateAPIView
@@ -50,6 +51,7 @@ urlpatterns = [
 
     url(r'^api/category_listings/(?P<pk>\d+)/$', CategoryListingListAPIView.as_view(), name='category-listings-list'),
     url(r'^api/sub_category_listings/(?P<pk>\d+)/$', SubCategoryListingListAPIView.as_view(), name='sub-category-listings-list'),
-    url(r'^api/docs/', include('rest_framework_docs.urls')),
+#   Commented out ebcause rest framework docs are not compatible with newest django version
+#   url(r'^api/docs/', include('rest_framework_docs.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
